@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "netcheck"
+version = "0.1.0"
+description = "Check if the network is working"
+authors = ["ikievite <ikievite@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = "^7.2.2"
+aioping = "^0.3.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+pytest-cov = "^4.0.0"
+wemake-python-styleguide = "^0.17.0"
+isort = "^5.12.0"
+ipython = "^8.11.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+netcheck = "netcheck.scripts.netcheck:main"
+
