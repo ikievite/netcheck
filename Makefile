@@ -6,3 +6,6 @@ lint:
 
 black:
 	poetry run black netcheck
+
+isort:
+	poetry run isort netcheck
