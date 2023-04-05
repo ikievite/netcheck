@@ -3,4 +3,4 @@
 
 from collections import namedtuple
 
-ip_status = namedtuple("ip_status", "ip, status")
+ip_status = namedtuple("ip_status", "ip, description, status")
