@@ -4,10 +4,10 @@
 import asyncio
 import json
 import subprocess
-from pprint import pprint
 
 from dotenv import dotenv_values
-from halo import Halo
+from rich.console import Console
+from rich.table import Table
 
 from netcheck.datatypes import ip_status
 
@@ -82,8 +82,21 @@ def async_network_check(ip_dict):
 
 def network_check():
     """Check network."""
-    with Halo(text="Loading", spinner="dots"):
+    console = Console()
+    with console.status("Checking", spinner="bouncingBall"):
         gateways = find_gw()
         for gw in gateways:
             IP_DICT.update(gw)
-        pprint(async_network_check(IP_DICT))
+        res = async_network_check(IP_DICT)
+
+        table = Table(title="NetCheck")
+
+        table.add_column("IP address / Domain name", justify="center")
+        table.add_column("Description", justify="center")
+        table.add_column("Description", justify="center")
+
+        for r in res:
+            table.add_row(r.ip, r.description, r.status)
+
+        console = Console()
+        console.print(table)
