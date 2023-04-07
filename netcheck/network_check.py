@@ -14,7 +14,7 @@ from netcheck.datatypes import ip_status
 IP_DICT = dotenv_values(".env")
 
 show_show_default_route = "ip --json route show default".split()
-ping_ip_command = "ping -i 0,2 -c 3 -n {ip}"
+ping_ip_command = "ping -i 0,2 -c 3 -n -W 1 {ip}"
 
 
 async def async_ping(ip, desc):
@@ -93,10 +93,10 @@ def network_check():
 
         table.add_column("IP address / Domain name", justify="center")
         table.add_column("Description", justify="center")
-        table.add_column("Description", justify="center")
+        table.add_column("Status", justify="center")
 
         for r in res:
-            table.add_row(r.ip, r.description, r.status)
+            status_color = 'green' if r.status == 'reachable' else 'red'
+            table.add_row(r.ip, r.description, f"[{status_color}]{r.status}[/{status_color}]")
 
-        console = Console()
         console.print(table)
