@@ -3,15 +3,18 @@
 
 import asyncio
 import json
+import os
 import subprocess
 
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from rich.console import Console
 from rich.table import Table
 
 from netcheck.datatypes import ip_status
 
-IP_DICT = dotenv_values(".env")
+load_dotenv()
+
+IP_DICT = json.loads(os.getenv("IP_DICT", "{}"))
 
 show_show_default_route = "ip --json route show default".split()
 ping_ip_command = "ping -i 0,2 -c 3 -n -W 1 {ip}"
