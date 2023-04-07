@@ -9,3 +9,9 @@ black:
 
 isort:
 	poetry run isort netcheck
+
+build:
+	poetry build
+
+package-install:
+	python3 -m pip install dist/*.whl
