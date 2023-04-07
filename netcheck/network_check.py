@@ -96,7 +96,9 @@ def network_check():
         table.add_column("Status", justify="center")
 
         for r in res:
-            status_color = 'green' if r.status == 'reachable' else 'red'
-            table.add_row(r.ip, r.description, f"[{status_color}]{r.status}[/{status_color}]")
+            status_color = "green" if r.status == "reachable" else "red"
+            table.add_row(
+                r.ip, r.description, f"[{status_color}]{r.status}[/{status_color}]"
+            )
 
         console.print(table)
