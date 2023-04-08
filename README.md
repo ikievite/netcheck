@@ -17,9 +17,11 @@ make package-install
 ```
 
 ## Usage
-You need to add an env variable in json format, for example 
+You need to add an env variable in json format,
+
+for example 
 ```
-IP_DICT='{"SRV1": "192.0.2.10", "DNS": "192.0.2.10"}'
+IP_DICT='{"SRV1": "192.0.2.10", "DNS": "1.1.1.1"}'
 ```
 after run `netcheck`
 
