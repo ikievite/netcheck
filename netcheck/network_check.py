@@ -7,10 +7,9 @@ import os
 import subprocess
 
 from dotenv import load_dotenv
-from rich.console import Console
-from rich.table import Table
 
 from netcheck.datatypes import ip_status
+from netcheck.rich_console import console
 
 load_dotenv()
 
@@ -84,24 +83,15 @@ def async_network_check(ip_dict):
 
 
 def network_check():
-    """Check network."""
-    console = Console()
+    """Check network.
+
+    Returns:
+        list of namedtuples
+    """
     with console.status("Checking", spinner="bouncingBall"):
         gateways = find_gw()
         for gw in gateways:
             IP_DICT.update(gw)
         res = async_network_check(IP_DICT)
 
-        table = Table(title="NetCheck")
-
-        table.add_column("IP address / Domain name", justify="center")
-        table.add_column("Description", justify="center")
-        table.add_column("Status", justify="center")
-
-        for r in res:
-            status_color = "green" if r.status == "reachable" else "red"
-            table.add_row(
-                r.ip, r.description, f"[{status_color}]{r.status}[/{status_color}]"
-            )
-
-        console.print(table)
+    return res
