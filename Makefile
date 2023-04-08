@@ -10,6 +10,9 @@ black:
 isort:
 	poetry run isort netcheck
 
+test:
+	poetry run pytest --cov=netcheck --cov-report xml tests/
+
 build:
 	poetry build
 
